@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/mars-go/mars/pkg/app"
 	"github.com/mars-go/mars/pkg/db"
 	"github.com/mars-go/mars/pkg/model"
 	"github.com/mars-go/mars/pkg/utilx"
@@ -30,5 +31,7 @@ func main() {
 		logx.Error(err)
 	}
 	logx.Infof("page: %#v\n", utilx.JSON(page))
+
+	app.Run()
 
 }
