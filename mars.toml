@@ -3,6 +3,9 @@ title = "Mars - Mars is Markdown Server with GO!"
 theme = ""
 language = "zh"
 
+[web]
+    db = "databases/mars.db"
+
 [params]
   favicon = ""
   description = ""
