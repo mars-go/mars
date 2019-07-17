@@ -3,36 +3,60 @@ package app
 import (
 	"fmt"
 	"github.com/foolin/goview"
-	"github.com/go-chi/chi"
+	"html/template"
 	"net/http"
+	"time"
 )
 
 func Run() {
 
-	r := chi.NewRouter()
-
-	//render index use `index` without `.html` extension, that will render with master layout.
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		err := goview.Render(w, http.StatusOK, "index", goview.M{
-			"title": "Index title!",
-			"add": func(a int, b int) int {
-				return a + b
+	gvFront := goview.New(goview.Config{
+		Root:      "views/web",
+		Extension: ".html",
+		Master:    "layouts/master",
+		Partials:  []string{"partials/ad"},
+		Funcs: template.FuncMap{
+			"copy": func() string {
+				return time.Now().Format("2006")
 			},
+		},
+		DisableCache: true,
+	})
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		err := gvFront.Render(w, http.StatusOK, "index", goview.M{
+			"title": "Frontend title!",
 		})
 		if err != nil {
 			fmt.Fprintf(w, "Render index error: %v!", err)
 		}
 	})
 
-	//render page use `page.tpl` with '.html' will only file template without master layout.
-	r.Get("/page", func(w http.ResponseWriter, r *http.Request) {
-		err := goview.Render(w, http.StatusOK, "page.html", goview.M{"title": "Page file title!!"})
+	//=========== Backend ===========//
+
+	gvBackend := goview.New(goview.Config{
+		Root:      "views/admin",
+		Extension: ".html",
+		Master:    "layouts/master",
+		Partials:  []string{},
+		Funcs: template.FuncMap{
+			"copy": func() string {
+				return time.Now().Format("2006")
+			},
+		},
+		DisableCache: true,
+	})
+
+	http.HandleFunc("/admin/", func(w http.ResponseWriter, r *http.Request) {
+		err := gvBackend.Render(w, http.StatusOK, "index", goview.M{
+			"title": "Backend title!",
+		})
 		if err != nil {
-			fmt.Fprintf(w, "Render page.html error: %v!", err)
+			fmt.Fprintf(w, "Render index error: %v!", err)
 		}
 	})
 
-	fmt.Println("Listening and serving HTTP on :9090")
-	http.ListenAndServe(":9090", r)
+	fmt.Printf("Server start on :9090")
+	http.ListenAndServe(":9090", nil)
 
 }

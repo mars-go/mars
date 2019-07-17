@@ -14,7 +14,7 @@ func main() {
 	//logx.Init(false)
 	//defer logx.Flush()
 
-	err := db.Init("mars.db")
+	err := db.Init("data/mars.db")
 	if err != nil {
 		panic(err)
 	}
