@@ -2,15 +2,24 @@ package db
 
 import bolt "go.etcd.io/bbolt"
 
-var db *bolt.DB
+var db *DB
 
-func Init(path string) error {
-	var err error
-	db, err = bolt.Open(path, 0666, nil)
-	return err
+type DB struct {
+	*bolt.DB
 }
 
-func DB() *bolt.DB {
+func Init(path string) error {
+	bt, err := bolt.Open(path, 0666, nil)
+	if err != nil {
+		return err
+	}
+	db = &DB{
+		DB: bt,
+	}
+	return nil
+}
+
+func Get() *DB {
 	return db
 }
 

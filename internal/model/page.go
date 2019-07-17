@@ -4,27 +4,31 @@ import (
 	"github.com/mars-go/mars/internal/db"
 )
 
-type MetaKey string
+type MatterKey string
 
 const (
-	MetaTitle       MetaKey = "title"
-	MetaSlug        MetaKey = "slug"
-	MetaDate        MetaKey = "date"
-	MetaKeywords    MetaKey = "keywords"
-	MetaDescription MetaKey = "description"
-	MetaDraft       MetaKey = "draft"
-	MetaSummary     MetaKey = "summary"
-	MetaLayout      MetaKey = "layout"
-	MetaType        MetaKey = "type"
-	MetaUrl         MetaKey = "url"
-	MetaWeight      MetaKey = "weight"
+	MatterTitle       MatterKey = "title"
+	MatterSlug        MatterKey = "slug"
+	MatterDate        MatterKey = "date"
+	MatterKeywords    MatterKey = "keywords"
+	MatterDescription MatterKey = "description"
+	MatterDraft       MatterKey = "draft"
+	MatterSummary     MatterKey = "summary"
+	MatterLayout      MatterKey = "layout"
+	MatterType        MatterKey = "type"
+	MatterUrl         MatterKey = "url"
+	MatterWeight      MatterKey = "weight"
 	//publishDate
 	//expiryDate
 	//taxonomies
+
+	DefaultIndexName = "_index"
 )
 
 type Page struct {
 	db.Model
-	Metas   map[string]interface{}
-	Content string
+	Path    string                 //路径
+	Name    string                 //文件名
+	Matters map[string]interface{} //属性
+	Content string                 //内容
 }
