@@ -1,0 +1,8 @@
+baseURL = "https://localhost:9090/"
+title = "Mars - Mars is Markdown Server with GO!"
+theme = ""
+language = "zh"
+
+[params]
+  favicon = ""
+  description = ""
