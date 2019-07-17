@@ -1,17 +1,17 @@
 package main
 
 import (
-	"github.com/mars-go/mars/internal/db"
-	"github.com/mars-go/mars/internal/model"
-	"github.com/mars-go/mars/internal/utilx"
-	"github.com/mars-go/mars/internal/utilx/logx"
+	"github.com/mars-go/mars/pkg/db"
+	"github.com/mars-go/mars/pkg/model"
+	"github.com/mars-go/mars/pkg/utilx"
+	"github.com/mars-go/mars/pkg/utilx/logx"
 )
 
 func main() {
 
 	//日志
-	logx.Init(false)
-	defer logx.Flush()
+	//logx.Init(false)
+	//defer logx.Flush()
 
 	err := db.Init("mars.db")
 	if err != nil {

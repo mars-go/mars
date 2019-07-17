@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/mars-go/mars/internal/db"
+	"github.com/mars-go/mars/pkg/db"
 )
 
 type MatterKey string
