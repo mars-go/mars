@@ -22,7 +22,7 @@ func main() {
 
 	optDB := db.Get()
 
-	page := model.Page{
+	page := model.Post{
 		Name: "Hello world",
 	}
 

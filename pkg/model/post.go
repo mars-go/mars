@@ -2,6 +2,7 @@ package model
 
 import (
 	"github.com/mars-go/mars/pkg/db"
+	"time"
 )
 
 type MatterKey string
@@ -25,10 +26,18 @@ const (
 	DefaultIndexName = "_index"
 )
 
-type Page struct {
+type Post struct {
 	db.Model
-	Path    string                 //路径
-	Name    string                 //文件名
-	Matters map[string]interface{} //属性
-	Content string                 //内容
+	CategoryID uint64                 //分类
+	Name       string                 //文件名
+	Title      string                 //标题
+	Date       time.Time              //日期
+	Summary    string                 //描述
+	Slug       string                 //路由标识
+	URL        string                 //URL路由
+	weight     int                    //权重，排序用
+	Tags       []string               //标签
+	Matters    map[string]interface{} //属性
+	Content    string                 //内容
+	Draft      bool                   //是否是草稿
 }
